@@ -1,9 +1,9 @@
-#project pig
+#project pig: in this game ,a player rolls unitl he/she get 1 and it tries to avoid 1 but also tries to maintain high score
 import random
 def roll():#Creting a function to generate random value 
     min_value=1
     max_value=6
-    roll=random.randit(min_value,max_value)
+    roll=random.randint(min_value,max_value)
     return roll
 
 while True:
@@ -17,4 +17,30 @@ while True:
  else:
        print("Invalid,try again.")
 
-print(players)
+max_score=50
+player_scores=[0 for _ in range(players)] 
+print(player_scores)
+
+while max(player_scores)<max_score: #while loop for continuning until reached max score
+  for i in range(players):
+    print("\nPlayer",i+1,"turn has just started!\n")
+    current_score=0
+    while True:
+        should_roll=input("Would you like to roll (y)?")
+        if should_roll.lower()!="y": 
+           break
+        value=roll()
+        if value==1:
+            print("You rolled a 1 ! Turn done")
+            break
+        else:
+            current_score+=value
+            print("You rolled a:",value)
+            print("Your score is:",current_score)
+            
+    player_scores[i]==current_score
+    print("Your total score is:",player_scores[i])
+    max_score=max(player_scores)
+    winning_idx=player_scores.index(max_score)
+    print("Player number:",winning_idx+1,
+          "is the winner with a score of:",max_score)
